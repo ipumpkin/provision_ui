@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.site.site
+    - eck.eck_type.task.site_task
+    - field.storage.task.site
+id: task.site_task.site
+field_name: site
+entity_type: task
+bundle: site_task
+label: Site
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:site'
+  handler_settings:
+    target_bundles:
+      site: site
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

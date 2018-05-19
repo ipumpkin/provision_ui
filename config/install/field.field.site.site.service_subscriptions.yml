@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.site.site
+    - field.storage.site.service_subscriptions
+id: site.site.service_subscriptions
+field_name: service_subscriptions
+entity_type: site
+bundle: site
+label: 'Service Subscriptions'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:provision_subscription'
+  handler_settings: {  }
+field_type: entity_reference

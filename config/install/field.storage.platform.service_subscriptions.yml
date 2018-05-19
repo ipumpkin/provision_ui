@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - provision_ui
+id: platform.service_subscriptions
+field_name: service_subscriptions
+entity_type: platform
+type: entity_reference
+settings:
+  target_type: provision_subscription
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

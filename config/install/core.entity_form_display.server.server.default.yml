@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.server.server
+    - field.field.server.server.services
+  module:
+    - provision_ui
+id: server.server.default
+targetEntityType: server
+bundle: server
+mode: default
+content:
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  services: true
+  uid: true

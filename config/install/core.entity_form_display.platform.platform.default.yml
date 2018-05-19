@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.platform.platform
+    - field.field.platform.platform.client
+    - field.field.platform.platform.service_subscriptions
+  module:
+    - provision_ui
+id: platform.platform.default
+targetEntityType: platform
+bundle: platform
+mode: default
+content:
+  client:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  service_subscriptions: true
+  uid: true

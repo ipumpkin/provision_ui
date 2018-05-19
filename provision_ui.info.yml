@@ -1,0 +1,9 @@
+name: 'Provision UI'
+description: 'Provision front UI for provision4.'
+core: 8.x
+type: module
+package: Provision
+dependencies:
+  - eck
+  - field
+  - user

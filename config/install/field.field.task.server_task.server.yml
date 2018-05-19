@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.server.server
+    - eck.eck_type.task.server_task
+    - field.storage.task.server
+id: task.server_task.server
+field_name: server
+entity_type: task
+bundle: server_task
+label: Server
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:server'
+  handler_settings:
+    target_bundles:
+      server: server
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

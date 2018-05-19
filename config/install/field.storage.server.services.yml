@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - provision_ui
+id: server.services
+field_name: services
+entity_type: server
+type: entity_reference
+settings:
+  target_type: provision_service
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

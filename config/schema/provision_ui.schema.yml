@@ -1,0 +1,37 @@
+provision_ui.service.*:
+  type: config_entity
+  label: 'Service'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    service:
+      type: string
+      label: 'Service'
+    type:
+      type: string
+      label: 'Type'
+    properties:
+      type: sequence
+      label: 'Properties'
+      sequence:
+        type: string
+
+provision_ui.service_subscription.*:
+  type: config_entity
+  label: 'Service ubscription'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    service:
+      type: string
+      label: 'Service'
+    server:
+      type: string
+      label: 'Server'
+    properties:
+      type: sequence
+      label: 'Properties'
+      sequence:
+        type: string

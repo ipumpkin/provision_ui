@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.platform.platform
+    - eck.eck_type.site.site
+    - field.storage.site.platform_ref
+id: site.site.platform_ref
+field_name: platform_ref
+entity_type: site
+bundle: site
+label: Platform
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:platform'
+  handler_settings:
+    target_bundles:
+      platform: platform
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

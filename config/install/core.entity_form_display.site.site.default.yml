@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.site.site
+    - field.field.site.site.platform_ref
+    - field.field.site.site.service_subscriptions
+  module:
+    - provision_ui
+id: site.site.default
+targetEntityType: site
+bundle: site
+mode: default
+content:
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  platform_ref: true
+  service_subscriptions: true
+  uid: true

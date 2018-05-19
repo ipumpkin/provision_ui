@@ -1,0 +1,108 @@
+<?php
+
+use Aegir\Provision\Context;
+use Drupal\provision_ui\Entity\ContextEckEntity;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\provision_ui\ProvisionUI;
+use Drupal\provision_ui\Entity\TaskEckEntity;
+use Drupal\Core\Queue\QueueFactory;
+
+/**
+ * @file
+ * Main module implementation of proviesion UI.
+ */
+
+/**
+ * Implements hook_entity_type_alter().
+ * @param array $entity_types
+ */
+function provision_ui_entity_type_alter(array &$entity_types) {
+  foreach (Context::getContextTypeOptions() as $context => $label){
+    if(isset($entity_types[$context])){
+      $entity_types[$context]->setClass(ContextEckEntity::class);
+      
+      $entity_types[$context]->setFormClass('default','Drupal\provision_ui\Entity\Form\Context' . ucfirst($context) . 'Form');
+      $entity_types[$context]->setFormClass('edit','Drupal\provision_ui\Entity\Form\Context' . ucfirst($context) . 'Form');
+    }
+  }
+  if(isset($entity_types['task'])){
+    $entity_types['task']->setClass(TaskEckEntity::class);
+  }
+}
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ * 
+ * @param EntityInterface $entity
+ */
+function provision_ui_server_insert(EntityInterface $entity){
+  ProvisionUI::taskSave($entity, TRUE);
+  ProvisionUI::taskServices($entity);
+  ProvisionUI::taskVerify($entity);
+}
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ *
+ * @param EntityInterface $entity
+ */
+function provision_ui_server_update(EntityInterface $entity){
+  ProvisionUI::taskSave($entity);
+  ProvisionUI::taskServices($entity);
+  ProvisionUI::taskVerify($entity);
+}
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ * 
+ * @param EntityInterface $entity
+ */
+function provision_ui_platform_insert(EntityInterface $entity){
+  ProvisionUI::taskSave($entity, TRUE);
+  ProvisionUI::taskServices($entity);
+  ProvisionUI::taskVerify($entity);
+}
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ *
+ * @param EntityInterface $entity
+ */
+function provision_ui_platform_update(EntityInterface $entity){
+  ProvisionUI::taskSave($entity);
+  ProvisionUI::taskServices($entity);
+  ProvisionUI::taskVerify($entity);
+}
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ * 
+ * @param EntityInterface $entity
+ */
+function provision_ui_site_insert(EntityInterface $entity){
+  ProvisionUI::taskSave($entity, TRUE);
+  ProvisionUI::taskServices($entity);
+  ProvisionUI::taskVerify($entity);
+}
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ *
+ * @param EntityInterface $entity
+ */
+function provision_ui_site_update(EntityInterface $entity){
+  ProvisionUI::taskSave($entity);
+  ProvisionUI::taskServices($entity);
+  ProvisionUI::taskVerify($entity);
+}
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ * 
+ * @param EntityInterface $entity
+ */
+function provision_ui_task_insert(EntityInterface $entity){
+  $queue_name = $entity->task_queue->value;
+  /** @var QueueFactory $queue_factory */
+  $queue_factory = \Drupal::service('queue');
+  /** @var QueueInterface $queue */
+  $queue = $queue_factory->get($queue_name);
+  if($queue){
+    $data = new \stdClass();
+    $data->task_id = $entity->id();
+    $queue->createItem($data);
+  }
+}
